@@ -7,12 +7,13 @@ $password = "";
 $dbase = "srdjan";
 if ($_POST['email'] != '' && $_POST['subject'] != '' && $_POST['body'] != '') {
     // Connection to DBase
-    $conn = mysqli_connect($host, $user, $password, $dbase);
+
+    $conn = new mysqli($host, $user, $password, $dbase);
     $email = strip_tags(mysqli_real_escape_string($conn, $_POST['email']));
     $subject = strip_tags(mysqli_real_escape_string($conn, $_POST['subject']));
     $body = strip_tags(mysqli_real_escape_string($conn, $_POST['body']));
 
     $query = "INSERT INTO mails VALUES('','{$email}','{$subject}','{$body}')";
-    mysqli_query($conn, $query);
-    mysqli_close($conn);
+    $conn->query($query);
+    $conn->close();
 }

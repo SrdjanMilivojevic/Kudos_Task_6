@@ -5,11 +5,11 @@ $user = "root";
 $password = "";
 $dbase = "srdjan";
 
-$from = 'coyotewise@gmail.com'; //specify here the address that you want email to be sent from.
+$from = 'somemail@gmail.com'; //specify here the address that you want email to be sent from.
 
 // Connection to DataBase
-$conn = mysqli_connect($host, $user, $password, $dbase);
-$result = mysqli_query($conn, "SELECT * FROM mails");
+$conn = new mysqli($host, $user, $password, $dbase);
+$result = $conn->query("SELECT * FROM mails");
 
 while ($row = mysqli_fetch_array($result)) {
     $email = $row['email'];
@@ -21,5 +21,4 @@ while ($row = mysqli_fetch_array($result)) {
 
     echo 'Email sent to: ' . $email . '<br>';
 }
-
-mysqli_close($conn);
+$conn->close();
